@@ -14,7 +14,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
     private final ExternalApiProperties props;
     private final HttpClientService httpClientService;
     @Override
-    public Single<PostDto> getFromApi1() {
-        return httpClientService.get(props.url(), PostDto.class);
+    public Single<PostDto> getFromApi1(Integer id) {
+        return httpClientService.get(props.url(), id, PostDto.class);
     }
 }

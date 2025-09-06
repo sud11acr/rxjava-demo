@@ -17,9 +17,10 @@ public class HttpClientServiceImpl implements HttpClientService {
     private final HttpClient client = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
     @Override
-    public <T> Single<T> get(String url, Class<T> responseType) {
+    public <T> Single<T> get(String url, Integer id, Class<T> responseType) {
+        String finalUrl = String.format("%s/%s", url, id);
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
+                .uri(URI.create(finalUrl))
                 .GET()
                 .build();
 
