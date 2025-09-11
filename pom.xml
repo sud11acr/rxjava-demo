@@ -54,6 +54,33 @@
 			<artifactId>reactor-adapter</artifactId>
 			<version>3.4.10</version>
 		</dependency>
+		<!-- Retrofit -->
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>retrofit</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+		<!-- Converter (JSON con Jackson o Gson) -->
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>converter-jackson</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+		<!-- RxJava adapter -->
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>adapter-rxjava2</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+		<!-- Resilience4j CircuitBreaker -->
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-spring-boot2</artifactId>
+			<version>2.2.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
