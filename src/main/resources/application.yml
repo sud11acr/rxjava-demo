@@ -1,0 +1,17 @@
+application:
+  error:
+    business-error:
+      500:
+        code: 'SA0003'
+        description: 'Los datos proporcionados no son válidos.'
+        errorCategory: 'INVALID_REQUEST'
+      404:
+        code: 'SA0003'
+        description: 'Los datos proporcionados no son válidos.'
+        errorCategory: 'INVALID_REQUEST'
+  external-apis:
+    authenticated-user-v1:
+      url: 'https://jsonplaceholder.typicode.com/posts/'
+external:
+  api:
+    url: 'https://jsonplaceholder.typicode.com/posts/'

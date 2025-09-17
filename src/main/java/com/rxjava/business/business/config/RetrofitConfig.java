@@ -1,6 +1,7 @@
 package com.rxjava.business.business.config;
 
 import com.rxjava.business.business.proxy.AuthenticatedUserProxy;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
+@Slf4j
 @Configuration
 public class RetrofitConfig {
 
@@ -18,6 +20,7 @@ public class RetrofitConfig {
     @Bean
     public AuthenticatedUserProxy authenticatedUserProxy() {
         OkHttpClient client = new OkHttpClient.Builder().build();
+        log.info("Base URL for AuthenticatedUserProxy: {}", baseUrl);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
