@@ -1,7 +1,7 @@
 package com.rxjava.business.business.proxy;
 
 
-import com.rxjava.business.business.model.proxy.Cuenta;
+import com.rxjava.business.business.model.proxy.Posts;
 import io.reactivex.Maybe;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -9,5 +9,5 @@ import retrofit2.http.Path;
 public interface AuthenticatedUserProxy {
 
     @GET("{id}")
-    Maybe<Cuenta> findById(@Path("id") Integer id);
+    Maybe<Posts> findById(@Path("id") Integer id);
 }
