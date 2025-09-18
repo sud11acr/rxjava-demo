@@ -1,4 +1,4 @@
-package com.rxjava.business.business.model.proxy;
+package com.rxjava.business.business.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Posts {
+public class PostsResponse {
     private String id;
     private String userId;
     private String body;

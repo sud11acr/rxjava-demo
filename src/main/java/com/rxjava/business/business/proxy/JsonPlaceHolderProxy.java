@@ -2,13 +2,16 @@ package com.rxjava.business.business.proxy;
 
 
 import com.rxjava.business.business.model.proxy.Posts;
-import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface AuthenticatedUserProxy {
+import java.util.List;
 
-    @GET("{id}")
+public interface JsonPlaceHolderProxy {
+
+    @GET("/posts/{id}")
     Observable<Posts> findById(@Path("id") Integer id);
+    @GET("/posts")
+    Observable<List<Posts>> findAll();
 }

@@ -1,6 +1,6 @@
 package com.rxjava.business.business.config;
 
-import com.rxjava.business.business.proxy.AuthenticatedUserProxy;
+import com.rxjava.business.business.proxy.JsonPlaceHolderProxy;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ public class RetrofitConfig {
     private String baseUrl;
 
     @Bean
-    public AuthenticatedUserProxy authenticatedUserProxy() {
+    public JsonPlaceHolderProxy authenticatedUserProxy() {
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -26,6 +26,6 @@ public class RetrofitConfig {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
-        return retrofit.create(AuthenticatedUserProxy.class);
+        return retrofit.create(JsonPlaceHolderProxy.class);
     }
 }
