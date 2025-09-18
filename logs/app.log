@@ -2725,3 +2725,9 @@ accusamus ratione error aut, title=at nam consequatur ea labore ea harum)])
 2025-09-18 17:46:05 [RxCachedThreadScheduler-1] INFO  c.r.b.b.s.impl.PostsServiceImpl - Posts obtenidos con éxito
 2025-09-18 17:46:05 [RxCachedThreadScheduler-1] INFO  c.r.b.b.c.BusinessApiController - Todos los posts obtenidos con éxito
 2025-09-18 17:46:05 [RxCachedThreadScheduler-1] INFO  c.r.b.b.c.BusinessApiController - Finalizado el procesamiento para obtener todos los posts
+2025-09-18 17:46:50 [main] INFO  c.r.b.business.BusinessApplication - Starting BusinessApplication using Java 17.0.9 on LAPTOP-6GC7N0RN with PID 1788 (D:\Programacion\Cursos\Rxjava\rxjava-demo\target\classes started by denke in D:\Programacion\Cursos\Rxjava\rxjava-demo)
+2025-09-18 17:46:50 [main] DEBUG c.r.b.business.BusinessApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-09-18 17:46:50 [main] INFO  c.r.b.business.BusinessApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:46:53 [main] INFO  c.r.b.business.BusinessApplication - Started BusinessApplication in 3.838 seconds (JVM running for 4.507)
+2025-09-18 17:47:01 [RxCachedThreadScheduler-1] INFO  c.r.b.b.c.BusinessApiController - Post con id 3 obtenido con éxito
+2025-09-18 17:47:01 [RxCachedThreadScheduler-1] INFO  c.r.b.b.c.BusinessApiController - Finalizado el procesamiento para el post con id 3
