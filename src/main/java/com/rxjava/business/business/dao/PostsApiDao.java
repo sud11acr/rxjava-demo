@@ -8,4 +8,5 @@ import io.reactivex.Single;
 public interface PostsApiDao {
     Observable<Posts> getPostsById(Integer id);
     Single<PostsDto> getAllPosts();
+    Observable<Posts> getAllPostsV2();
 }

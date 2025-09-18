@@ -33,4 +33,12 @@ public class PostsApiDaoImpl implements PostsApiDao {
                 .doOnSuccess(response -> log.info("PostsDto: {}", response.toString()))
                 .doOnError(error -> log.error("Error fetching posts", error));
     }
+
+    @Override
+    public Observable<Posts> getAllPostsV2() {
+        return proxy.findAll()
+                //.flatMapIterable(posts -> posts)
+                .flatMap(Observable::fromIterable)
+                .subscribeOn(Schedulers.io());
+    }
 }

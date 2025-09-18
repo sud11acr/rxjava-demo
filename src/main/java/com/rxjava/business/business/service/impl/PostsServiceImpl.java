@@ -6,6 +6,7 @@ import com.rxjava.business.business.model.response.PostsResponse;
 import com.rxjava.business.business.model.response.PostsResponseList;
 import com.rxjava.business.business.service.PostsService;
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,14 @@ public class PostsServiceImpl implements PostsService {
                 .map(postsMapper::buildPostsResponseListFromPostsList)
                 .toMaybe()
                 .doOnSuccess(success -> log.info("Posts obtenidos con éxito"))
+                .doOnError(error -> log.error("Error obteniendo posts", error));
+    }
+
+    @Override
+    public Observable<PostsResponse> getAllPostsV2() {
+        return postsApiDao.getAllPostsV2()
+                .map(postsMapper::buildPostsResponseFromPosts)
+                .doOnNext(success -> log.info("Post obtenido con éxito"))
                 .doOnError(error -> log.error("Error obteniendo posts", error));
     }
 
