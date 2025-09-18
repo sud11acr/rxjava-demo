@@ -5,7 +5,7 @@
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%red(%d{yyyy-MM-dd} %d{HH:mm:ss}.%d{SSS}) %highlight(%p) [%cyan(%t)] %boldRed(%C{26}) [%green(%M)][%magenta(%L)]:  %boldRed(%ex)  %boldRed(%logger{36}) - %boldBlue(%msg%n)</pattern>
+            <pattern>%red(%d{yyyy-MM-dd} %d{HH:mm:ss}.%d{SSS}) %highlight(%p) [%cyan(%t)] %boldRed(%C{26}) [%green(%M)][%magenta(%L)]:  %boldRed(%ex) %boldBlue(%msg%n)</pattern>
         </encoder>
     </appender>
 
