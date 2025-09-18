@@ -1267,3 +1267,11 @@ accusamus ratione error aut, title=at nam consequatur ea labore ea harum)])
 2025-09-18 16:43:02 [main] DEBUG c.r.b.business.BusinessApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
 2025-09-18 16:43:02 [main] INFO  c.r.b.business.BusinessApplication - No active profile set, falling back to 1 default profile: "default"
 2025-09-18 16:43:07 [main] INFO  c.r.b.business.BusinessApplication - Started BusinessApplication in 5.673 seconds (JVM running for 6.55)
+2025-09-18 16:44:19 [main] INFO  c.r.b.business.BusinessApplication - Starting BusinessApplication using Java 17.0.9 on LAPTOP-6GC7N0RN with PID 9416 (D:\Programacion\Cursos\Rxjava\rxjava-demo\target\classes started by denke in D:\Programacion\Cursos\Rxjava\rxjava-demo)
+2025-09-18 16:44:19 [main] DEBUG c.r.b.business.BusinessApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-09-18 16:44:19 [main] INFO  c.r.b.business.BusinessApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 16:44:22 [main] INFO  c.r.b.business.BusinessApplication - Started BusinessApplication in 3.829 seconds (JVM running for 4.419)
+2025-09-18 16:52:21 [main] INFO  c.r.b.business.BusinessApplication - Starting BusinessApplication using Java 17.0.9 on LAPTOP-6GC7N0RN with PID 13068 (D:\Programacion\Cursos\Rxjava\rxjava-demo\target\classes started by denke in D:\Programacion\Cursos\Rxjava\rxjava-demo)
+2025-09-18 16:52:21 [main] DEBUG c.r.b.business.BusinessApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-09-18 16:52:21 [main] INFO  c.r.b.business.BusinessApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 16:52:24 [main] INFO  c.r.b.business.BusinessApplication - Started BusinessApplication in 4.083 seconds (JVM running for 4.721)
