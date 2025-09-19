@@ -1,0 +1,3 @@
+application:
+  http-client:
+    jsonplaceholder-url: 'https://jsonplaceholder.typicode.com'

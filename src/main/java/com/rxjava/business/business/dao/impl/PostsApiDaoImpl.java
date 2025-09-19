@@ -1,6 +1,5 @@
 package com.rxjava.business.business.dao.impl;
 
-import com.rxjava.business.business.config.ExternalApiProperties;
 import com.rxjava.business.business.model.dto.PostsDto;
 import com.rxjava.business.business.model.proxy.Posts;
 import com.rxjava.business.business.proxy.JsonPlaceHolderProxy;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class PostsApiDaoImpl implements PostsApiDao {
-    private final ExternalApiProperties props;
     private final JsonPlaceHolderProxy proxy;
 
     @Override

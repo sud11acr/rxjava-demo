@@ -1,8 +1,8 @@
 package com.rxjava.business.business.config;
 
 import com.rxjava.business.business.proxy.JsonPlaceHolderProxy;
+import lombok.AllArgsConstructor;
 import okhttp3.OkHttpClient;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import retrofit2.Retrofit;
@@ -10,17 +10,16 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Configuration
+@AllArgsConstructor
 public class RetrofitConfig {
 
-    @Value("${application.external-apis.authenticated-user-v1.url}")
-    private String baseUrl;
+    private ExternalApiProperties externalApiProperties;
 
     @Bean
     public JsonPlaceHolderProxy authenticatedUserProxy() {
         OkHttpClient client = new OkHttpClient.Builder().build();
-
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(externalApiProperties.getJsonplaceholderUrl())
                 .client(client)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
