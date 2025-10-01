@@ -1,3 +1,9 @@
 application:
   http-client:
     jsonplaceholder-url: 'https://jsonplaceholder.typicode.com'
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: personal

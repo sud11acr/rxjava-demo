@@ -3,6 +3,7 @@ package com.rxjava.business.business.controller;
 import com.rxjava.business.business.model.response.PostsResponse;
 import com.rxjava.business.business.model.response.PostsResponseList;
 import com.rxjava.business.business.service.PostsService;
+import com.rxjava.business.business.service.UserService;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +45,6 @@ public class BusinessApiController {
                 .map(posts -> ResponseEntity.ok(Flowable.fromIterable(posts)))
                 .doOnSuccess(response -> log.info("Todos los posts (v2) obtenidos con éxito"));
     }
+
 
 }
