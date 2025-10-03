@@ -27,10 +27,33 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Observable<User> getUserById(String id) {
+        return RxJava2Adapter.monoToSingle(repository.findById(id))
+                .toObservable()
+                .switchIfEmpty(Observable.empty())
+                .subscribeOn(io())
+                .doOnSubscribe(disposable -> log.info("Fetching user with id: {}", id));
+    }
+
+
+    @Override
     public Completable saveUser(User user) {
         return RxJava2Adapter.monoToCompletable(repository.save(user))
                 .subscribeOn(io())
                 .doOnComplete(() -> log.info("User saved successfully: {}", user))
                 .doOnError(error -> log.error("Error saving user: {}", user, error));
+    }
+
+    @Override
+    public Observable<User> saveUserReturn(User user) {
+        return RxJava2Adapter.monoToSingle(repository.save(user))
+                .subscribeOn(io())
+                .toObservable()
+                .doOnNext(savedUser -> log.info("User saved successfully: {}", savedUser));
+    }
+
+    @Override
+    public Completable updateUser(User user) {
+        return null;
     }
 }

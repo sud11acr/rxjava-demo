@@ -6,5 +6,8 @@ import io.reactivex.Observable;
 
 public interface UserDao {
     Observable<User> getAllUsers();
+    Observable<User> getUserById(String id);
     Completable saveUser(User user);
+    Observable<User> saveUserReturn(User user);
+    Completable updateUser(User user);
 }
