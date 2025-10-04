@@ -60,23 +60,8 @@ public class UserServiceImpl implements UserService {
     public Completable updatePartialUser(UserRequest userRequest, String id) {
         return userDao.getUserById(id)
                 .flatMapCompletable(existingUser -> {
-                    buildUser(userRequest, existingUser);
+                    userMapper.updateEmailAndPhone(userRequest, existingUser);
                     return userDao.saveUser(existingUser);
-                });
-    }
-
-    private static void buildUser(UserRequest userRequest, User existingUser) {
-        Optional.ofNullable(userRequest.getEmail())
-                .ifPresent(email -> {
-                    if (StringUtils.isNotBlank(email)) {
-                        existingUser.setEmail(email);
-                    }
-                });
-        Optional.ofNullable(userRequest.getPhone())
-                .ifPresent(phone -> {
-                    if (StringUtils.isNotBlank(phone)) {
-                        existingUser.setPhone(phone);
-                    }
                 });
     }
 }
