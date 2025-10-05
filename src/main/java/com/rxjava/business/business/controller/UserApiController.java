@@ -8,6 +8,8 @@ import io.reactivex.Maybe;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @Slf4j
@@ -39,7 +42,7 @@ public class UserApiController {
         log.info("Begin save - UserApiController");
 
         return service.saveUser(userRequest)
-                .andThen(Maybe.just(ResponseEntity.ok().<Void>build()))
+                .andThen(Maybe.just(ResponseEntity.created(URI.create("")).<Void>build()))
                 .doOnSuccess(response ->
                         log.info("End save - UserApiController"));
     }
@@ -62,7 +65,7 @@ public class UserApiController {
         log.info("Begin update - UserApiController");
 
         return service.updateUser(userRequest, id)
-                .andThen(Maybe.just(ResponseEntity.ok().<Void>build()))
+                .andThen(Maybe.just(ResponseEntity.noContent().<Void>build()))
                 .doOnSuccess(response ->
                         log.info("End update - UserApiController"));
     }
@@ -72,9 +75,19 @@ public class UserApiController {
         log.info("Begin partialUpdate - UserApiController");
 
         return service.updatePartialUser(userRequest, id)
-                .andThen(Maybe.just(ResponseEntity.ok().<Void>build()))
+                .andThen(Maybe.just(ResponseEntity.noContent().<Void>build()))
                 .doOnSuccess(response ->
                         log.info("End partialUpdate - UserApiController"));
+    }
+
+    @DeleteMapping("/{id}")
+    public Maybe<ResponseEntity<Void>> deleteUser(@PathVariable String id) {
+        log.info("Begin deleteUser - UserApiController");
+
+        return service.deleteUser(id)
+                .andThen(Maybe.just(ResponseEntity.noContent().<Void>build()))
+                .doOnSuccess(response ->
+                        log.info("End deleteUser - UserApiController"));
     }
 
 }

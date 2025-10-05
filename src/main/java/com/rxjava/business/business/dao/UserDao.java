@@ -9,5 +9,5 @@ public interface UserDao {
     Observable<User> getUserById(String id);
     Completable saveUser(User user);
     Observable<User> saveUserReturn(User user);
-    Completable updateUser(User user);
+    Completable deleteUser(String id);
 }

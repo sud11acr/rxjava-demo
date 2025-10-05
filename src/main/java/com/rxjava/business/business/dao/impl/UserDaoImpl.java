@@ -53,7 +53,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Completable updateUser(User user) {
-        return null;
+    public Completable deleteUser(String id) {
+        return RxJava2Adapter.monoToCompletable(repository.deleteById(id))
+                .subscribeOn(io())
+                .doOnComplete(() -> log.info("User with id: {} deleted successfully", id))
+                .doOnError(error -> log.error("Error deleting user with id: {}", id, error));
     }
 }

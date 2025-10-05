@@ -2,7 +2,6 @@ package com.rxjava.business.business.service.impl;
 
 import com.rxjava.business.business.dao.UserDao;
 import com.rxjava.business.business.mapper.UserMapper;
-import com.rxjava.business.business.model.entity.User;
 import com.rxjava.business.business.model.request.UserRequest;
 import com.rxjava.business.business.model.response.UserResponse;
 import com.rxjava.business.business.service.UserService;
@@ -12,10 +11,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -63,5 +59,10 @@ public class UserServiceImpl implements UserService {
                     userMapper.updateEmailAndPhone(userRequest, existingUser);
                     return userDao.saveUser(existingUser);
                 });
+    }
+
+    @Override
+    public Completable deleteUser(String id) {
+        return userDao.deleteUser(id);
     }
 }

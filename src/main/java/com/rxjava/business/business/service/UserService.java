@@ -12,4 +12,5 @@ public interface UserService {
     Observable<UserResponse> saveUserReturn(UserRequest userRequest);
     Completable updateUser(UserRequest userRequest,String id);
     Completable updatePartialUser(UserRequest userRequest, String id);
+    Completable deleteUser(String id);
 }
