@@ -28,6 +28,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Observable<UserResponse> getUserById(String id) {
+        return userDao.getUserById(id)
+                .map(userMapper::buildUserResponseFromUserEntity);
+    }
+
+    @Override
     public Completable saveUser(UserRequest userRequest) {
         return Observable.fromCallable(() -> userRequest)
                 .map(userMapper::buildUserEntityFromUserRequest)

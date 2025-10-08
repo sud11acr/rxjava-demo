@@ -8,7 +8,6 @@ import io.reactivex.Maybe;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -35,6 +34,17 @@ public class UserApiController {
         return Maybe.just(ResponseEntity.ok(service.getAllUsers()))
                 .doOnSuccess(response ->
                         log.info("End getAll - UserApiController"));
+    }
+
+    @GetMapping("/{id}")
+    public Maybe<ResponseEntity<UserResponse>> getById(@PathVariable String id) {
+        log.info("Begin getById - UserApiController");
+        return service.getUserById(id)
+                .map(ResponseEntity::ok)
+                .firstElement()
+                .doOnSuccess(response ->
+                        log.info("End getById - UserApiController"));
+
     }
 
     @PostMapping
@@ -71,7 +81,8 @@ public class UserApiController {
     }
 
     @PatchMapping("/{id}")
-    public Maybe<ResponseEntity<Void>> partialUpdate(@RequestBody UserRequest userRequest, @PathVariable String id) {
+    public Maybe<ResponseEntity<Void>> partialUpdate(@RequestBody UserRequest userRequest,
+                                                     @PathVariable String id) {
         log.info("Begin partialUpdate - UserApiController");
 
         return service.updatePartialUser(userRequest, id)

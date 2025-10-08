@@ -1,0 +1,174 @@
+openapi: 3.0.3
+info:
+  title: User API (RxJava2)
+  version: 1.0.0
+  description: API reactiva para la gestión de usuarios utilizando RxJava2 y Spring Boot.
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+
+paths:
+  /users:
+    get:
+      summary: Obtener todos los usuarios
+      operationId: getAllUsers
+      tags: [User]
+      responses:
+        '200':
+          description: Lista de usuarios obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+    post:
+      summary: Crear un nuevo usuario
+      operationId: createUser
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+        '400':
+          description: Datos de entrada inválidos
+
+  /users/return:
+    post:
+      summary: Crear un nuevo usuario y devolver la información creada
+      operationId: saveAndReturnUser
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: Usuario creado y devuelto exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Datos de entrada inválidos
+
+  /users/{id}:
+    put:
+      summary: Actualizar completamente un usuario existente
+      operationId: updateUser
+      tags: [User]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '204':
+          description: Usuario actualizado correctamente
+        '404':
+          description: Usuario no encontrado
+
+    patch:
+      summary: Actualizar parcialmente un usuario
+      operationId: partialUpdateUser
+      tags: [User]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '204':
+          description: Usuario actualizado parcialmente
+        '404':
+          description: Usuario no encontrado
+
+    delete:
+      summary: Eliminar un usuario
+      operationId: deleteUser
+      tags: [User]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Usuario eliminado correctamente
+        '404':
+          description: Usuario no encontrado
+
+components:
+  schemas:
+    UserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Ayinin"
+        lastName:
+          type: string
+          example: "Doe"
+        email:
+          type: string
+          format: email
+          example: "ayinin@example.com"
+        phone:
+          type: string
+          example: "+1234567890"
+        contractDate:
+          type: string
+          format: date
+          example: "2023-01-01"
+        age:
+          type: integer
+          example: 30
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "123"
+        name:
+          type: string
+          example: "Ayinin"
+        email:
+          type: string
+          example: "ayinin@example.com"
+        phone:
+          type: string
+          example: "+1234567890"
+        lastName:
+          type: string
+          example: "Doe"
+        contractDate:
+          type: string
+          format: date
+          example: "2023-01-01"
+        age:
+          type: integer
+          example: 30
+
