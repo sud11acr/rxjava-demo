@@ -5,7 +5,6 @@ import com.rxjava.business.business.model.request.UserRequest;
 import com.rxjava.business.business.model.response.UserResponse;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
