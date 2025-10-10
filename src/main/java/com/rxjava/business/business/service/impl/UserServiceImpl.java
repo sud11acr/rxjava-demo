@@ -1,6 +1,7 @@
 package com.rxjava.business.business.service.impl;
 
 import com.rxjava.business.business.dao.UserDao;
+import com.rxjava.business.business.exception.BaseException;
 import com.rxjava.business.business.mapper.UserMapper;
 import com.rxjava.business.business.model.request.UserRequest;
 import com.rxjava.business.business.model.response.UserResponse;
@@ -69,6 +70,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Completable deleteUser(String id) {
-        return userDao.deleteUser(id);
+        return userDao.getUserById(id)
+                .switchIfEmpty(Observable.error(
+                        new BaseException("Not found user with id: " + id)))
+                .flatMapCompletable(user -> userDao.deleteUser(id));
+
     }
 }

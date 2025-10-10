@@ -98,6 +98,7 @@ public class UserApiController {
 
         return service.deleteUser(id)
                 .andThen(Maybe.just(ResponseEntity.noContent().<Void>build()))
+                .onErrorResumeNext(Maybe.just(ResponseEntity.notFound().build()))
                 .doOnSuccess(response ->
                         log.info("End deleteUser - UserApiController"));
     }
