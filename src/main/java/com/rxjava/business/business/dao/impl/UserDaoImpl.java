@@ -21,7 +21,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Observable<User> getAllUsers() {
         return RxJava2Adapter.fluxToObservable(repository.findAll())
-                .switchIfEmpty(Observable.empty())
                 .subscribeOn(io())
                 .doOnSubscribe(disposable -> log.info("Fetching all users from the database"));
     }
@@ -30,7 +29,10 @@ public class UserDaoImpl implements UserDao {
     public Observable<User> getUserById(String id) {
         return RxJava2Adapter.monoToSingle(repository.findById(id))
                 .toObservable()
-                .switchIfEmpty(Observable.empty())
+                .onErrorResumeNext(throwable -> {
+                    log.warn("Usuario no encontrado con id: {}", id);
+                    return Observable.empty();
+                })
                 .subscribeOn(io())
                 .doOnSubscribe(disposable -> log.info("Fetching user with id: {}", id));
     }

@@ -42,6 +42,7 @@ public class UserApiController {
         return service.getUserById(id)
                 .map(ResponseEntity::ok)
                 .firstElement()
+                .defaultIfEmpty(ResponseEntity.notFound().build())
                 .doOnSuccess(response ->
                         log.info("End getById - UserApiController"));
 
