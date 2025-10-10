@@ -1,0 +1,9 @@
+{
+  "id": "12345",
+  "name": "Aaron",
+  "lastName": "Camargo",
+  "email": "aaron.camargo@example.com",
+  "phone": "987654321",
+  "contractDate": "2025-10-09",
+  "age": 30
+}
