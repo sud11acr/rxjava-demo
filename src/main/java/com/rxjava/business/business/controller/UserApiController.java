@@ -33,7 +33,9 @@ public class UserApiController {
         log.info("Begin getAll - UserApiController");
         return Maybe.just(ResponseEntity.ok(service.getAllUsers()))
                 .doOnSuccess(response ->
-                        log.info("End getAll - UserApiController"));
+                        log.info("End getAll - UserApiController"))
+                .doOnError(error ->
+                        log.error("Error in getAll - {}", error.getMessage(), error));
     }
 
     @GetMapping("/{id}")
@@ -44,7 +46,9 @@ public class UserApiController {
                 .firstElement()
                 .defaultIfEmpty(ResponseEntity.notFound().build())
                 .doOnSuccess(response ->
-                        log.info("End getById - UserApiController"));
+                        log.info("End getById - UserApiController"))
+                .doOnError(error ->
+                        log.error("Error in getById {} - {}", id, error.getMessage(), error));
 
     }
 
@@ -55,7 +59,8 @@ public class UserApiController {
         return service.saveUser(userRequest)
                 .andThen(Maybe.just(ResponseEntity.created(URI.create("")).<Void>build()))
                 .doOnSuccess(response ->
-                        log.info("End save - UserApiController"));
+                        log.info("End save - UserApiController"))
+                .doOnError(error -> log.error("Error in save - {}", error.getMessage(), error));
     }
 
     @PostMapping("/return")
@@ -65,7 +70,9 @@ public class UserApiController {
                 .map(ResponseEntity::ok)
                 .firstElement()
                 .doOnSuccess(response ->
-                        log.info("End saveAndReturn - UserApiController"));
+                        log.info("End saveAndReturn - UserApiController"))
+                .doOnError(error ->
+                        log.error("Error in saveAndReturn - {}", error.getMessage(), error));
 
 
     }
@@ -78,7 +85,9 @@ public class UserApiController {
         return service.updateUser(userRequest, id)
                 .andThen(Maybe.just(ResponseEntity.noContent().<Void>build()))
                 .doOnSuccess(response ->
-                        log.info("End update - UserApiController"));
+                        log.info("End update - UserApiController"))
+                .doOnError(error ->
+                        log.error("Error in update {} - {}", id, error.getMessage(), error));
     }
 
     @PatchMapping("/{id}")
@@ -89,7 +98,9 @@ public class UserApiController {
         return service.updatePartialUser(userRequest, id)
                 .andThen(Maybe.just(ResponseEntity.noContent().<Void>build()))
                 .doOnSuccess(response ->
-                        log.info("End partialUpdate - UserApiController"));
+                        log.info("End partialUpdate - UserApiController"))
+                .doOnError(error ->
+                        log.error("Error in partialUpdate {} - {}", id, error.getMessage(), error));
     }
 
     @DeleteMapping("/{id}")
@@ -100,7 +111,9 @@ public class UserApiController {
                 .andThen(Maybe.just(ResponseEntity.noContent().<Void>build()))
                 .onErrorResumeNext(Maybe.just(ResponseEntity.notFound().build()))
                 .doOnSuccess(response ->
-                        log.info("End deleteUser - UserApiController"));
+                        log.info("End deleteUser - UserApiController"))
+                .doOnError(error ->
+                        log.error("Error in deleteUser {} - {}", id, error.getMessage(), error));
     }
 
 }

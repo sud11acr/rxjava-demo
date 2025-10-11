@@ -25,20 +25,25 @@ public class UserServiceImpl implements UserService {
     public Flowable<UserResponse> getAllUsers() {
         return userDao.getAllUsers()
                 .map(userMapper::buildUserResponseFromUserEntity)
-                .toFlowable(BackpressureStrategy.BUFFER);
+                .toFlowable(BackpressureStrategy.BUFFER)
+                .doOnError(e -> log.error("Error retrieving all users: {}", e.getMessage(), e))
+                .doOnComplete(() -> log.info("Successfully retrieved all users"));
     }
 
     @Override
     public Observable<UserResponse> getUserById(String id) {
         return userDao.getUserById(id)
-                .map(userMapper::buildUserResponseFromUserEntity);
+                .map(userMapper::buildUserResponseFromUserEntity)
+                .doOnError(e -> log.error("Error retrieving user {}: {}", id, e.getMessage(), e));
     }
 
     @Override
     public Completable saveUser(UserRequest userRequest) {
         return Observable.fromCallable(() -> userRequest)
                 .map(userMapper::buildUserEntityFromUserRequest)
-                .flatMapCompletable(userDao::saveUser);
+                .flatMapCompletable(userDao::saveUser)
+                .doOnComplete(() -> log.info("User saved successfully"))
+                .doOnError(e -> log.error("Error saving user: {}", e.getMessage(), e));
     }
 
     @Override
@@ -46,7 +51,10 @@ public class UserServiceImpl implements UserService {
         return Observable.just(userRequest)
                 .map(userMapper::buildUserEntityFromUserRequest)
                 .flatMap(userDao::saveUserReturn)
-                .map(userMapper::buildUserResponseFromUserEntity);
+                .map(userMapper::buildUserResponseFromUserEntity)
+                .doOnError(e ->
+                        log.error("Error saving and returning user: {}", e.getMessage(), e));
+
     }
 
     @Override
@@ -56,7 +64,10 @@ public class UserServiceImpl implements UserService {
                 .flatMapCompletable(user -> {
                     user.setId(id);
                     return userDao.saveUser(user);
-                });
+                })
+                .doOnComplete(() -> log.info("User {} updated successfully", id))
+                .doOnError(e ->
+                        log.error("Error updating user {}: {}", id, e.getMessage(), e));
     }
 
     @Override
@@ -65,7 +76,10 @@ public class UserServiceImpl implements UserService {
                 .flatMapCompletable(existingUser -> {
                     userMapper.updateEmailAndPhone(userRequest, existingUser);
                     return userDao.saveUser(existingUser);
-                });
+                })
+                .doOnComplete(() -> log.info("User {} partially updated successfully", id))
+                .doOnError(e ->
+                        log.error("Error partially updating user {}: {}", id, e.getMessage(), e));
     }
 
     @Override
@@ -73,7 +87,9 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserById(id)
                 .switchIfEmpty(Observable.error(
                         new BaseException("Not found user with id: " + id)))
-                .flatMapCompletable(user -> userDao.deleteUser(id));
+                .flatMapCompletable(user -> userDao.deleteUser(id))
+                .doOnComplete(() -> log.info("User {} deleted successfully", id))
+                .doOnError(e -> log.error("Error deleting user {}: {}", id, e.getMessage(), e));
 
     }
 }
